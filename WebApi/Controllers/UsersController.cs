@@ -35,5 +35,12 @@ namespace WebApi.Controllers
             var json_user = JsonConvert.SerializeObject(user);
             return Ok(json_user);
         }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var users = _userService.GetAll();
+            return Ok(users);
+        }
     }
 }

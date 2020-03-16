@@ -24,8 +24,9 @@ namespace WebApi
         {
             //services.AddCors(c =>
             //{
-            //    c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:44366")
-            //            .AllowAnyHeader());
+            //    c.AddPolicy("AllowOrigin", options => options.WithOrigins("https://localhost:8080")
+            //        .AllowAnyMethod()    
+            //        .AllowAnyHeader());
             //});
 
             services.AddCors(c =>
@@ -33,6 +34,7 @@ namespace WebApi
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin()
                         .AllowAnyHeader());
             });
+            //services.AddCors();
 
             services.AddControllers();
             services.AddOptions();
@@ -54,6 +56,7 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors("AllowOrigin");
+            //app.UseCors(options => options.WithOrigins("http://lcoalhost:8080").AllowAnyMethod().AllowAnyHeader());
             //app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader());
             app.UseHttpsRedirection();
 

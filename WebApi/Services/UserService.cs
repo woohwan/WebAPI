@@ -70,9 +70,22 @@ namespace WebApi.Services
             return user.WithoutPassword();
         }
 
+        // Just Query APS Holdings
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            // select에서 new User 로 User타입으로 생성. 2020. 03.17
+            var userList = ( from user in _db.VCoviGwUser
+                           where user.DnName == "APS홀딩스"
+                           select new User
+                           {
+                               Id = user.UrCode,
+                               Username = user.EmpName,
+                               Company = user.DnName,
+                               DepName = user.GrName
+                           }).ToList();
+
+            return userList.AsEnumerable();
+
         }
 
         public bool IsAuthenticated(string domain, string username, string pwd)
